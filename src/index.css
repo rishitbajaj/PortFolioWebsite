@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,700;1,9..40,300&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: #030508;
+  color: #e8edf5;
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+@media (max-width: 768px) {
+  body { cursor: auto; }
+}
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #030508; }
+::-webkit-scrollbar-thumb { background: #b9ff4b; }
+
+@layer utilities {
+  .clip-corner { clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%); }
+  .clip-corner-sm { clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%); }
+  .text-hollow { -webkit-text-stroke: 1px #4a5568; color: transparent; }
+  .text-hollow-lime { -webkit-text-stroke: 1px #b9ff4b; color: transparent; }
+  .text-hollow-white { -webkit-text-stroke: 1px #e8edf5; color: transparent; }
+}
+
+/* Glitch effect */
+.glitch { position: relative; display: inline-block; }
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+}
+.glitch::before {
+  color: #00e5ff;
+  clip-path: polygon(0 30%, 100% 30%, 100% 55%, 0 55%);
+  transform: translate(-3px, 0);
+  animation: glitch1 4s infinite;
+}
+.glitch::after {
+  color: #ff2d78;
+  clip-path: polygon(0 65%, 100% 65%, 100% 80%, 0 80%);
+  transform: translate(3px, 0);
+  animation: glitch2 4s infinite;
+}
+
+@keyframes glitch1 {
+  0%,90%,100% { transform: translate(-3px,0); clip-path: polygon(0 30%,100% 30%,100% 55%,0 55%); }
+  92% { transform: translate(3px,0); }
+  94% { transform: translate(-1px,2px); }
+  96% { transform: translate(1px,-2px); }
+}
+@keyframes glitch2 {
+  0%,90%,100% { transform: translate(3px,0); clip-path: polygon(0 65%,100% 65%,100% 80%,0 80%); }
+  92% { transform: translate(-3px,0); }
+  94% { transform: translate(2px,-1px); }
+  96% { transform: translate(-2px,1px); }
+}
